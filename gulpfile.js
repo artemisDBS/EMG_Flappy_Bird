@@ -1,9 +1,8 @@
-var gulp = require('gulp')
-var ghPages = require('gulp-gh-pages')
-var path = require('path')
+const gulp = require('gulp');
+const ghPages = require('gulp-gh-pages');
 
+gulp.task('deploy', function () {
+	return gulp.src('./build/**/*').pipe(ghPages());
+});
 
-gulp.task('deploy', function(cb) {
-    return gulp.src('./build/**/*')
-    	.pipe(ghPages())
-})
+exports.default = gulp.series('deploy');
