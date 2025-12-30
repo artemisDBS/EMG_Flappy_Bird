@@ -1,3 +1,12 @@
+/* Scale the whole game proportionally to fit the viewport */
+:root {
+	--game-w: 288;
+	--game-h: 512;
+
+	/* Fit by height, but also prevent horizontal overflow on narrow screens */
+	--scale: min(calc(100vh / (var(--game-h) * 1px)), calc(100vw / (var(--game-w) * 1px)));
+}
+
 html,
 body {
 	width: 100%;
@@ -7,26 +16,29 @@ body {
 
 body {
 	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
-	background: #eaeaea;
-	user-select: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
-/* 水平垂直居中-公共类 */
+/* Keep the original “design” size, then scale visually */
+.game {
+	width: calc(var(--game-w) * 1px);
+	height: calc(var(--game-h) * 1px);
+
+	transform: scale(var(--scale));
+	transform-origin: center center;
+
+	/* Optional: remove old centering */
+	margin: 0;
+}
+
 .c-wrap {
 	display: table;
 }
 .c-inner {
 	display: table-cell;
 	vertical-align: middle;
-}
-
-.game {
-	position: relative;
-	width: 288px;
-	height: 512px;
-	margin: 0 auto;
 }
 
 .scene {
